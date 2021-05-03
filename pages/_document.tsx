@@ -3,6 +3,7 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 import React from "react";
 
 class CustomDocument extends Document {
+  static getInitialProps = getInitialProps
   render() {
     return (
       <Html>
@@ -17,6 +18,5 @@ class CustomDocument extends Document {
     );
   }
 }
-CustomDocument.getInitialProps = getInitialProps;
 
 export default CustomDocument;
