@@ -1,6 +1,5 @@
 {
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "postinstall": "npx patch-package",
     "prestart": "rm -rf .next .expo node_modules/.cache",
     "start": "npx next"
@@ -15,9 +14,11 @@
     "react-native-web": "^0.16.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@types/react": "^17.0.4",
     "babel-preset-expo": "^8.3.0",
     "next-compose-plugins": "^2.2.1",
+    "next-transpile-modules": "^7.0.0",
     "npm-force-resolutions": "^0.0.10",
     "typescript": "^4.2.4"
   },
