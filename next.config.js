@@ -11,7 +11,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 module.exports = withPlugins(
   [withTM, withBundleAnalyzer, [withExpo, { projectRoot: __dirname }]],
   {
-    future: { webpack5: false },
+    future: { webpack5: true },
     webpack(config, options) {
       config.plugins.push(
         new StatsWriterPlugin({
