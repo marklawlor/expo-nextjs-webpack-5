@@ -2,7 +2,11 @@ const { withExpo } = require("@expo/next-adapter");
 const withPlugins = require("next-compose-plugins");
 const { StatsWriterPlugin } = require("webpack-stats-plugin");
 
-const withTM = require("next-transpile-modules")(["react-native-web"]);
+const withTM = require("next-transpile-modules")([
+  "react-native-web",
+  "react-native",
+  "react-native-reanimated",
+]);
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
@@ -25,6 +29,9 @@ module.exports = withPlugins(
           },
         })
       );
+
+      console.log(config.mode, config.optimization);
+
       return config;
     },
   }
