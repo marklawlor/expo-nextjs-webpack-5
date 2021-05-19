@@ -16,6 +16,11 @@ npm install --legacy-peer-deps
 npm start
 ```
 
+### FYI
+
+The expo packages are in active development and the version numbers may not match the patches listed here. They should still work, but just create an issue if they don't
+
+
 ## Issues
 
 > NPM install fails due to peer dependencies
