@@ -1,5 +1,5 @@
 diff --git a/node_modules/@expo/webpack-config/webpack/addons/withOptimizations.js b/node_modules/@expo/webpack-config/webpack/addons/withOptimizations.js
-index 685f0a9..45bb5d6 100644
+index 8411aeb..6e91898 100644
 --- a/node_modules/@expo/webpack-config/webpack/addons/withOptimizations.js
 +++ b/node_modules/@expo/webpack-config/webpack/addons/withOptimizations.js
 @@ -7,6 +7,7 @@ exports.isDebugMode = void 0;
@@ -10,7 +10,7 @@ index 685f0a9..45bb5d6 100644
  const postcss_safe_parser_1 = __importDefault(require("postcss-safe-parser"));
  const terser_webpack_plugin_1 = __importDefault(require("terser-webpack-plugin"));
  /**
-@@ -77,21 +78,7 @@ function withOptimizations(webpackConfig) {
+@@ -81,21 +82,7 @@ function withOptimizations(webpackConfig) {
                  sourceMap: shouldUseSourceMap,
              }),
              // This is only used in production mode
@@ -34,7 +34,7 @@ index 685f0a9..45bb5d6 100644
          // Automatically split vendor and commons
          // https://twitter.com/wSokra/status/969633336732905474
 diff --git a/node_modules/@expo/webpack-config/webpack/addons/withUnimodules.js b/node_modules/@expo/webpack-config/webpack/addons/withUnimodules.js
-index ac8c1b6..ec0fbc1 100644
+index e293a98..5411c51 100644
 --- a/node_modules/@expo/webpack-config/webpack/addons/withUnimodules.js
 +++ b/node_modules/@expo/webpack-config/webpack/addons/withUnimodules.js
 @@ -39,6 +39,7 @@ function withUnimodules(webpackConfig = {}, env = {}, argv = {}) {
@@ -45,8 +45,8 @@ index ac8c1b6..ec0fbc1 100644
      const environment = env_1.validateEnvironment(env);
      let { supportsFontLoading } = argv;
      // If the args don't specify this then we'll check if the input already supports font loading.
-@@ -106,7 +107,7 @@ function withUnimodules(webpackConfig = {}, env = {}, argv = {}) {
-         extensions: env_1.getModuleFileExtensions('web') });
+@@ -117,7 +118,7 @@ function withUnimodules(webpackConfig = {}, env = {}, argv = {}) {
+     };
      // Transpile and remove expo modules from Next.js externals.
      const includeFunc = babelLoader.include;
 -    webpackConfig = ignoreExternalModules(webpackConfig, includeFunc);
@@ -54,7 +54,7 @@ index ac8c1b6..ec0fbc1 100644
      // Add a loose requirement on the ResizeObserver polyfill if it's installed...
      webpackConfig = withEntry_1.default(webpackConfig, env, {
          entryPath: 'resize-observer-polyfill/dist/ResizeObserver.global',
-@@ -126,7 +127,7 @@ exports.default = withUnimodules;
+@@ -137,7 +138,7 @@ exports.default = withUnimodules;
   * @param webpackConfig Config to be modified
   * @param shouldIncludeModule A method that returns a boolean when the input module should be transpiled and externed.
   */
@@ -63,7 +63,7 @@ index ac8c1b6..ec0fbc1 100644
      if (!webpackConfig.externals) {
          return webpackConfig;
      }
-@@ -137,6 +138,14 @@ function ignoreExternalModules(webpackConfig, shouldIncludeModule) {
+@@ -148,6 +149,13 @@ function ignoreExternalModules(webpackConfig, shouldIncludeModule) {
          if (typeof external !== 'function') {
              return external;
          }
@@ -74,7 +74,6 @@ index ac8c1b6..ec0fbc1 100644
 +                return shouldIncludeModule(relPath) ? undefined : external(ctx);
 +            })
 +        }
-+
          return ((ctx, req, cb) => {
              const relPath = path_1.default.join('node_modules', req);
              return shouldIncludeModule(relPath) ? cb() : external(ctx, req, cb);
