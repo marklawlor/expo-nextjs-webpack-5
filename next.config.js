@@ -5,7 +5,6 @@ const { StatsWriterPlugin } = require("webpack-stats-plugin");
 const withTM = require("next-transpile-modules")([
   "react-native-web",
   "react-native",
-  "react-native-reanimated",
 ]);
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
@@ -17,20 +16,17 @@ module.exports = withPlugins(
   {
     future: { webpack5: true },
     webpack(config, options) {
-      config.plugins.push(
-        new StatsWriterPlugin({
-          filename: "stats.json",
-          stats: {
-            context: "./src", // optional, will improve readability of the paths
-            assets: true,
-            entrypoints: true,
-            chunks: true,
-            modules: true,
-          },
-        })
-      );
+      config.resolve.mainFields.unshift("react-native");
 
-      console.log(config.mode, config.optimization);
+      // config.plugins.push(
+      //   new StatsWriterPlugin({
+      //     filename: "stats.json",
+      //     stats: {
+      //       context: "./src",
+      //       optimizationBailout: true,
+      //     },
+      //   })
+      // );
 
       return config;
     },

@@ -1,15 +1,28 @@
-import { useSharedValue } from "react-native-reanimated";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
 
 import { View, Button } from "react-native";
 
 export default function IndexPage() {
-  const sharedVal = useSharedValue(0);
+  const offset = useSharedValue(0);
+
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: offset.value * 255 }],
+    };
+  });
+
   return (
-    <View>
-      <Button
-        onPress={() => (sharedVal.value = Math.random())}
-        title="Button"
+    <>
+      <Animated.View
+        style={[
+          { width: 20, height: 20, backgroundColor: "blue" },
+          animatedStyles,
+        ]}
       />
-    </View>
+      <Button onPress={() => (offset.value = Math.random())} title="Move" />
+    </>
   );
 }
