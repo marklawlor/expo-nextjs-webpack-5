@@ -2,7 +2,7 @@
 
 An experiment to get the @expo/next-adapter working with the latest NextJS 11.x features
 
-| Please checkout the tag `<=10.2` if your still using Next 10.x
+> Please checkout the tag `<=10.2` if your still using Next 10.x
 
 If using yarn
 
