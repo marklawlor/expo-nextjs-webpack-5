@@ -12,6 +12,6 @@ export default function IndexPage() {
 
 const styles = StyleSheet.create({
   text: {
-    color: "red"
-  }
-})
+    color: "red",
+  },
+});

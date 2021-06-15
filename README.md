@@ -1,6 +1,8 @@
 # expo-nextjs-webpack-5
 
-An experiment to get the @expo/next-adapter working with the latest NextJS 10.2 features
+An experiment to get the @expo/next-adapter working with the latest NextJS 11.x features
+
+| Please checkout the tag `<=10.2` if your still using Next 10.x
 
 If using yarn
 
@@ -19,7 +21,6 @@ npm start
 ### FYI
 
 The expo packages are in active development and the version numbers may not match the patches listed here. They should still work, but just create an issue if they don't
-
 
 ## Issues
 

@@ -30,7 +30,7 @@ index 2e63eb4..fbea871 100644
 -                projectRoot: nextConfig.projectRoot || process.cwd(),
 -            }, { supportsFontLoading: false });
 +                projectRoot: nextConfig.projectRoot || process.cwd()
-+            }, { supportsFontLoading: false, webpack5: (options.config.future || {}).webpack5 });
++            }, { supportsFontLoading: false, webpack5: (options.config || {}).webpack5 === undefined ? true : false });
              // Use original public path
              (expoConfig.output || {}).publicPath = (config.output || {}).publicPath;
              // TODO: Bacon: use commonjs for RNW babel maybe...
