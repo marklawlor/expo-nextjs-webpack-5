@@ -1,4 +1,3 @@
-import React from "react";
 import { StyleSheet, ActivityIndicator, View, Text } from "react-native";
 
 export default function IndexPage() {
