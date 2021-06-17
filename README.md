@@ -36,6 +36,8 @@ Resolved by patching @expo/next-adapter to add the missing babel transform
 
 Resolved by locking "html-webpack-plugin" to "5.3.0"
 
+You will also get this error after you run `npm audit` or another command the modifies your lockfile / dependancy tree. Just run `npm install` again to make it go away
+
 > NextJS pages do not compile
 
 Resolved by patching ignoreExternalModules to Webpack5 syntax
