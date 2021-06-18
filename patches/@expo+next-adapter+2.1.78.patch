@@ -1,8 +1,8 @@
 diff --git a/node_modules/@expo/next-adapter/build/babel.js b/node_modules/@expo/next-adapter/build/babel.js
-index ab1b808..55ad187 100644
+index ab1b808..63e3f6a 100644
 --- a/node_modules/@expo/next-adapter/build/babel.js
 +++ b/node_modules/@expo/next-adapter/build/babel.js
-@@ -13,12 +13,16 @@ module.exports = function (api) {
+@@ -13,9 +13,10 @@ module.exports = function (api) {
          if (missingPackages.length)
              throw new Error(`[BABEL]: preset \`@expo/next-adapter/babel\` is missing peer dependencies: ${missingPackages.join(', ')}`);
      }
@@ -14,14 +14,8 @@ index ab1b808..55ad187 100644
              // Only use next in the browser, it'll break your native project/
              isWeb && require('next/babel'),
          ].filter(Boolean),
-+        plugins: [
-+            isWeb && "@babel/plugin-proposal-class-properties",
-+        ].filter(Boolean),
-     };
- };
- function hasModule(name) {
 diff --git a/node_modules/@expo/next-adapter/build/withExpo.js b/node_modules/@expo/next-adapter/build/withExpo.js
-index 097b778..f2992f6 100644
+index 097b778..4346968 100644
 --- a/node_modules/@expo/next-adapter/build/withExpo.js
 +++ b/node_modules/@expo/next-adapter/build/withExpo.js
 @@ -9,9 +9,10 @@ function withExpo(nextConfig = {}) {
@@ -37,3 +31,39 @@ index 097b778..f2992f6 100644
              // Use original public path
              (expoConfig.output || {}).publicPath = (config.output || {}).publicPath;
              // TODO: Bacon: use commonjs for RNW babel maybe...
+diff --git a/node_modules/@expo/next-adapter/document.js b/node_modules/@expo/next-adapter/document.js
+index 6e35da8..e83635f 100644
+--- a/node_modules/@expo/next-adapter/document.js
++++ b/node_modules/@expo/next-adapter/document.js
+@@ -44,16 +44,15 @@ body {
+ }
+ `;
+ 
+-export async function getInitialProps({ renderPage }) {
+-  AppRegistry.registerComponent('Main', () => Main);
+-  const { getStyleElement } = AppRegistry.getApplication('Main');
+-  const page = renderPage();
+-  const styles = [<style dangerouslySetInnerHTML={{ __html: style }} />, getStyleElement()];
+-  return { ...page, styles: React.Children.toArray(styles) };
+-}
+-
+ export class Document extends NextDocument {
+-  static getInitialProps = getInitialProps;
++  static getInitialProps({ renderPage }) {
++    AppRegistry.registerComponent('Main', () => Main);
++    const { getStyleElement } = AppRegistry.getApplication('Main');
++    const page = renderPage();
++    const styles = [<style dangerouslySetInnerHTML={{ __html: style }} />, getStyleElement()];
++    return { ...page, styles: React.Children.toArray(styles) };
++  }
++
+   render() {
+     return (
+       <Html>
+@@ -69,4 +68,6 @@ export class Document extends NextDocument {
+   }
+ }
+ 
++export const getInitialProps = Document.getInitialProps
++
+ export default Document;

@@ -6,7 +6,6 @@
   },
   "dependencies": {
     "@expo/next-adapter": "2.1.78",
-    "html-webpack-plugin": "^5.3.1",
     "next": "11.0.0",
     "patch-package": "6.4.7",
     "postcss": "^8.3.5",
@@ -16,7 +15,6 @@
     "react-native-web": "0.16.5"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "7.14.5",
     "@types/react": "17.0.11",
     "babel-preset-expo": "8.4.0",
     "next-compose-plugins": "2.2.1",
