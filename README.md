@@ -4,13 +4,19 @@ An experiment to get the @expo/next-adapter working with the latest NextJS 11.x 
 
 > Please checkout the tag `<=10.2` if your still using Next 10.x
 
-## Instructions 
+## TLDR: How to use this in your own project
+
+- `npm i --save-dev postcss`
+- Copy the patches folder to your project
+- Add `"postinstall": "npx patch-package",` to your package.json scripts
+- `npm install --legacy-peer-deps`
+
+## Local dev 
 
 If using yarn
 
 ```
 yarn install
-yarn install postcss
 yarn start
 ```
 
@@ -18,7 +24,6 @@ If using npm
 
 ```
 npm install --legacy-peer-deps
-npm install postcss --legacy-peer-deps
 npm start
 ```
 
@@ -36,7 +41,7 @@ Use `--legacy-peer-deps` when installing
 
 ~~Resolved by patching @expo/next-adapter to add the missing babel transform~~
 
-Resolved by refactoring the _document.tsx
+Resolved by patching the _document.tsx
 
 > `TypeError: Cannot read property 'version' of undefined`
 
