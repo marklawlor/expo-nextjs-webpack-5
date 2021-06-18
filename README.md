@@ -34,7 +34,9 @@ Use `--legacy-peer-deps` when installing
 
 > Babel class properties errors when building \_document.tsx
 
-Resolved by patching @expo/next-adapter to add the missing babel transform
+~~Resolved by patching @expo/next-adapter to add the missing babel transform~~
+
+Resolved by refactoring the _document.tsx
 
 > `TypeError: Cannot read property 'version' of undefined`
 
