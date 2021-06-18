@@ -1,8 +1,21 @@
 diff --git a/node_modules/@expo/webpack-config/webpack/addons/withUnimodules.js b/node_modules/@expo/webpack-config/webpack/addons/withUnimodules.js
-index e293a98..5411c51 100644
+index e293a98..920f2a7 100644
 --- a/node_modules/@expo/webpack-config/webpack/addons/withUnimodules.js
 +++ b/node_modules/@expo/webpack-config/webpack/addons/withUnimodules.js
-@@ -39,6 +39,7 @@ function withUnimodules(webpackConfig = {}, env = {}, argv = {}) {
+@@ -8,10 +8,11 @@ const paths_1 = require("@expo/config/paths");
+ const path_1 = __importDefault(require("path"));
+ const env_1 = require("../env");
+ const loaders_1 = require("../loaders");
+-const plugins_1 = require("../plugins");
++const expo_define_plugin_1 = require("../plugins/ExpoDefinePlugin").default
+ const utils_1 = require("../utils");
+ const withAlias_1 = __importDefault(require("./withAlias"));
+ const withEntry_1 = __importDefault(require("./withEntry"));
++
+ /**
+  * Wrap your existing webpack config with support for Unimodules.
+  * ex: Storybook `({ config }) => withUnimodules(config)`
+@@ -39,6 +40,7 @@ function withUnimodules(webpackConfig = {}, env = {}, argv = {}) {
          webpackConfig.output = {};
      // Attempt to use the input webpack config mode
      env.mode = env.mode || webpackConfig.mode;
@@ -10,7 +23,16 @@ index e293a98..5411c51 100644
      const environment = env_1.validateEnvironment(env);
      let { supportsFontLoading } = argv;
      // If the args don't specify this then we'll check if the input already supports font loading.
-@@ -117,7 +118,7 @@ function withUnimodules(webpackConfig = {}, env = {}, argv = {}) {
+@@ -88,7 +90,7 @@ function withUnimodules(webpackConfig = {}, env = {}, argv = {}) {
+     };
+     webpackConfig.plugins.push(
+     // Used for surfacing information related to constants
+-    new plugins_1.ExpoDefinePlugin({
++    new expo_define_plugin_1({
+         mode,
+         publicUrl,
+         config,
+@@ -117,7 +119,7 @@ function withUnimodules(webpackConfig = {}, env = {}, argv = {}) {
      };
      // Transpile and remove expo modules from Next.js externals.
      const includeFunc = babelLoader.include;
@@ -19,7 +41,7 @@ index e293a98..5411c51 100644
      // Add a loose requirement on the ResizeObserver polyfill if it's installed...
      webpackConfig = withEntry_1.default(webpackConfig, env, {
          entryPath: 'resize-observer-polyfill/dist/ResizeObserver.global',
-@@ -137,7 +138,7 @@ exports.default = withUnimodules;
+@@ -137,7 +139,7 @@ exports.default = withUnimodules;
   * @param webpackConfig Config to be modified
   * @param shouldIncludeModule A method that returns a boolean when the input module should be transpiled and externed.
   */
@@ -28,7 +50,7 @@ index e293a98..5411c51 100644
      if (!webpackConfig.externals) {
          return webpackConfig;
      }
-@@ -148,6 +149,13 @@ function ignoreExternalModules(webpackConfig, shouldIncludeModule) {
+@@ -148,6 +150,13 @@ function ignoreExternalModules(webpackConfig, shouldIncludeModule) {
          if (typeof external !== 'function') {
              return external;
          }

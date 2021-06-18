@@ -4,10 +4,13 @@ An experiment to get the @expo/next-adapter working with the latest NextJS 11.x 
 
 > Please checkout the tag `<=10.2` if your still using Next 10.x
 
+## Instructions 
+
 If using yarn
 
 ```
 yarn install
+yarn install postcss
 yarn start
 ```
 
@@ -15,6 +18,7 @@ If using npm
 
 ```
 npm install --legacy-peer-deps
+npm install postcss --legacy-peer-deps
 npm start
 ```
 
@@ -34,9 +38,9 @@ Resolved by patching @expo/next-adapter to add the missing babel transform
 
 > `TypeError: Cannot read property 'version' of undefined`
 
-Resolved by locking "html-webpack-plugin" to "5.3.0"
+~~Resolved by locking "html-webpack-plugin" to "5.3.0"~~
 
-You will also get this error after you run `npm audit` or another command the modifies your lockfile / dependancy tree. Just run `npm install` again to make it go away
+Fixed by patching withUnimodules to only used the required plugins (avoiding html-webpack-plugin from being loaded)
 
 > NextJS pages do not compile
 
@@ -44,7 +48,9 @@ Resolved by patching ignoreExternalModules to Webpack5 syntax
 
 > NextJS react transform conflicts with Expo react trasform
 
-Resolved by patching babel-preset-expo to enable useTransformReactJsxExperimental
+~~Resolved by patching babel-preset-expo to enable useTransformReactJsxExperimental~~
+
+Resolved by patching babel-preset-expo to correctly identify the NextJS 11 bundler allowing options to be passed in. Requires v8.4.0. PR created https://github.com/expo/expo/pull/13327 
 
 > PostCSS Errors when building in production
 
