@@ -48,7 +48,9 @@ Resolved by patching babel-preset-expo to enable useTransformReactJsxExperimenta
 
 > PostCSS Errors when building in production
 
-`optimize-css-assets-webpack-plugin` is deprecated for Webpack5. Need to patch @expo/webpack-config to use `css-minimizer-webpack-plugin`
+~~`optimize-css-assets-webpack-plugin` is deprecated for Webpack5. Need to patch @expo/webpack-config to use `css-minimizer-webpack-plugin`~~
+
+Better fix is to simply install `postcss` at the top level. This will ensure NextJS is using `postcss 8.x`
 
 > React-native-web cannot use import outside of module
 
