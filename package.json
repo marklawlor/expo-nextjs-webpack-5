@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "@expo/next-adapter": "3.0.1",
-    "next": "11.0.1",
+    "next": "11.0.2-canary.16",
     "patch-package": "6.4.7",
     "postcss": "^8.3.5",
     "react": "17.0.2",

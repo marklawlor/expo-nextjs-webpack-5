@@ -1,9 +1,6 @@
 const { withExpo } = require("@expo/next-adapter");
 const withPlugins = require("next-compose-plugins");
 
-const withTM = require("next-transpile-modules")(["react-native-web"]);
-
-module.exports = withPlugins(
-  [withTM, [withExpo, { projectRoot: __dirname }]],
-  {}
-);
+module.exports = withPlugins([[withExpo, { projectRoot: __dirname }]], {
+  experimental: { esmExternals: "loose" },
+});

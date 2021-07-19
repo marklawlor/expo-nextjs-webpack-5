@@ -1,0 +1,508 @@
+diff --git a/node_modules/@expo/webpack-config/package.json b/node_modules/@expo/webpack-config/package.json
+index 896b424..6111432 100644
+--- a/node_modules/@expo/webpack-config/package.json
++++ b/node_modules/@expo/webpack-config/package.json
+@@ -1,27 +1,85 @@
+ {
+-  "_from": "https://registry.npmjs.org/@expo/webpack-config/-/webpack-config-0.13.1.tgz",
++  "_from": "@expo/webpack-config@0.13.1",
+   "_id": "@expo/webpack-config@0.13.1",
+   "_inBundle": false,
+   "_integrity": "sha512-OaTtB5nQp4Vqxx+ORDIn7ROL4yEqQBFYPp3TnPVKi9AxOOxqjatxvcIUreDJlb2r9G+Eeub9dW0DSF6ETtBnGg==",
+   "_location": "/@expo/webpack-config",
+-  "_phantomChildren": {},
++  "_phantomChildren": {
++    "@webassemblyjs/ast": "1.9.0",
++    "@webassemblyjs/helper-module-context": "1.9.0",
++    "@webassemblyjs/wasm-edit": "1.9.0",
++    "@webassemblyjs/wasm-parser": "1.9.0",
++    "acorn": "6.4.2",
++    "ajv": "6.12.6",
++    "ajv-errors": "1.0.1",
++    "ajv-keywords": "3.5.2",
++    "arr-diff": "4.0.0",
++    "arr-flatten": "1.1.0",
++    "array-unique": "0.3.2",
++    "bluebird": "3.7.2",
++    "chrome-trace-event": "1.0.3",
++    "define-property": "2.0.2",
++    "enhanced-resolve": "4.5.0",
++    "eslint-scope": "4.0.3",
++    "extend-shallow": "3.0.2",
++    "extglob": "2.0.4",
++    "figgy-pudding": "3.5.2",
++    "find-cache-dir": "2.1.0",
++    "fragment-cache": "0.2.1",
++    "glob": "7.1.7",
++    "graceful-fs": "4.2.6",
++    "infer-owner": "1.0.4",
++    "is-buffer": "1.1.6",
++    "is-extendable": "0.1.1",
++    "isobject": "3.0.1",
++    "json-parse-better-errors": "1.0.2",
++    "kind-of": "6.0.3",
++    "loader-runner": "2.4.0",
++    "loader-utils": "1.4.0",
++    "lru-cache": "6.0.0",
++    "memory-fs": "0.4.1",
++    "mississippi": "3.0.0",
++    "mkdirp": "0.5.5",
++    "move-concurrently": "1.0.1",
++    "nanomatch": "1.2.13",
++    "neo-async": "2.6.2",
++    "node-libs-browser": "2.2.1",
++    "object.pick": "1.3.0",
++    "promise-inflight": "1.0.1",
++    "regex-not": "1.0.2",
++    "repeat-element": "1.1.4",
++    "repeat-string": "1.6.1",
++    "serialize-javascript": "4.0.0",
++    "snapdragon": "0.8.2",
++    "snapdragon-node": "2.1.1",
++    "split-string": "3.1.0",
++    "tapable": "1.1.3",
++    "terser": "4.8.0",
++    "to-regex": "3.0.2",
++    "unique-filename": "1.1.1",
++    "watchpack": "1.7.5",
++    "webpack-sources": "1.4.3",
++    "worker-farm": "1.7.0",
++    "y18n": "4.0.3"
++  },
+   "_requested": {
+-    "type": "remote",
+-    "raw": "@expo/webpack-config@https://registry.npmjs.org/@expo/webpack-config/-/webpack-config-0.13.1.tgz",
++    "type": "version",
++    "registry": true,
++    "raw": "@expo/webpack-config@0.13.1",
+     "name": "@expo/webpack-config",
+     "escapedName": "@expo%2fwebpack-config",
+     "scope": "@expo",
+-    "rawSpec": "https://registry.npmjs.org/@expo/webpack-config/-/webpack-config-0.13.1.tgz",
+-    "saveSpec": "https://registry.npmjs.org/@expo/webpack-config/-/webpack-config-0.13.1.tgz",
+-    "fetchSpec": "https://registry.npmjs.org/@expo/webpack-config/-/webpack-config-0.13.1.tgz"
++    "rawSpec": "0.13.1",
++    "saveSpec": null,
++    "fetchSpec": "0.13.1"
+   },
+   "_requiredBy": [
+-    "/"
++    "/@expo/next-adapter"
+   ],
+   "_resolved": "https://registry.npmjs.org/@expo/webpack-config/-/webpack-config-0.13.1.tgz",
+   "_shasum": "df68534d5b25acc36fd9d77495c33a2dadda3270",
+-  "_spec": "@expo/webpack-config@https://registry.npmjs.org/@expo/webpack-config/-/webpack-config-0.13.1.tgz",
+-  "_where": "/tmp/tmp-2927483go32gB9YrNxI",
++  "_spec": "@expo/webpack-config@0.13.1",
++  "_where": "/home/mark/Test/expo-nextjs-webpack-15/node_modules/@expo/next-adapter",
+   "browserslist": {
+     "production": [
+       ">0.2%",
+diff --git a/node_modules/@expo/webpack-config/webpack/loaders/createBabelLoader.js b/node_modules/@expo/webpack-config/webpack/loaders/createBabelLoader.js
+index 89de223..1aab3b4 100644
+--- a/node_modules/@expo/webpack-config/webpack/loaders/createBabelLoader.js
++++ b/node_modules/@expo/webpack-config/webpack/loaders/createBabelLoader.js
+@@ -1,7 +1,9 @@
+ "use strict";
+-var __importDefault = (this && this.__importDefault) || function (mod) {
+-    return (mod && mod.__esModule) ? mod : { "default": mod };
+-};
++var __importDefault =
++  (this && this.__importDefault) ||
++  function (mod) {
++    return mod && mod.__esModule ? mod : { default: mod };
++  };
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.createBabelLoaderFromEnvironment = void 0;
+ const core_1 = require("@babel/core");
+@@ -13,66 +15,68 @@ const path_1 = __importDefault(require("path"));
+ const resolve_from_1 = __importDefault(require("resolve-from"));
+ const env_1 = require("../env");
+ // Source maps are resource heavy and can cause out of memory issue for large source files.
+-const shouldUseSourceMap = getenv_1.boolish('GENERATE_SOURCEMAP', true);
+-const getModule = (name) => path_1.default.join('node_modules', name);
++const shouldUseSourceMap = getenv_1.boolish("GENERATE_SOURCEMAP", true);
++const getModule = (name) => path_1.default.join("node_modules", name);
+ // Only compile files from the react ecosystem.
+ const includeModulesThatContainPaths = [
+-    getModule('react-native'),
+-    getModule('react-navigation'),
+-    getModule('expo'),
+-    getModule('unimodules'),
+-    getModule('@react'),
+-    getModule('@expo'),
+-    getModule('@use-expo'),
+-    getModule('@unimodules'),
+-    getModule('native-base'),
+-    getModule('styled-components'),
++  // getModule('react-native'),
++  // getModule('react-navigation'),
++  // getModule('expo'),
++  // getModule('unimodules'),
++  // getModule('@react'),
++  // getModule('@expo'),
++  // getModule('@use-expo'),
++  // getModule('@unimodules'),
++  // getModule('native-base'),
++  // getModule('styled-components'),
+ ];
+ const excludedRootPaths = [
+-    '/node_modules',
+-    '/bower_components',
+-    '/.expo/',
+-    // Prevent transpiling webpack generated files.
+-    '(webpack)',
++  "/node_modules",
++  "/bower_components",
++  "/.expo/",
++  // Prevent transpiling webpack generated files.
++  "(webpack)",
+ ];
+ const parsedPackageNames = [];
+ // TODO: Bacon: Support internal packages. ex: react/fbjs
+ function packageNameFromPath(inputPath) {
+-    const modules = inputPath.split('node_modules/');
+-    const libAndFile = modules.pop();
+-    if (!libAndFile)
+-        return null;
+-    if (libAndFile.charAt(0) === '@') {
+-        const [org, lib] = libAndFile.split('/');
+-        return org + '/' + lib;
+-    }
+-    else {
+-        const components = libAndFile.split('/');
+-        const first = components.shift();
+-        return first || null;
+-    }
++  const modules = inputPath.split("node_modules/");
++  const libAndFile = modules.pop();
++  if (!libAndFile) return null;
++  if (libAndFile.charAt(0) === "@") {
++    const [org, lib] = libAndFile.split("/");
++    return org + "/" + lib;
++  } else {
++    const components = libAndFile.split("/");
++    const first = components.shift();
++    return first || null;
++  }
+ }
+ function logPackage(packageName) {
+-    if (!parsedPackageNames.includes(packageName)) {
+-        parsedPackageNames.push(packageName);
+-        console.log(chalk_1.default.cyan('\nCompiling module: ' + chalk_1.default.bold(packageName)));
+-    }
++  if (!parsedPackageNames.includes(packageName)) {
++    parsedPackageNames.push(packageName);
++    console.log(
++      chalk_1.default.cyan(
++        "\nCompiling module: " + chalk_1.default.bold(packageName)
++      )
++    );
++  }
+ }
+ function ensureRoot(possibleProjectRoot) {
+-    if (typeof possibleProjectRoot === 'string') {
+-        return path_1.default.resolve(possibleProjectRoot);
+-    }
+-    return paths_1.getPossibleProjectRoot();
++  if (typeof possibleProjectRoot === "string") {
++    return path_1.default.resolve(possibleProjectRoot);
++  }
++  return paths_1.getPossibleProjectRoot();
+ }
+-function generateCacheIdentifier(projectRoot, version = '1') {
+-    const filename = path_1.default.join(projectRoot, 'foobar.js');
+-    const cacheKey = `babel-cache-${version}-`;
+-    const partial = core_1.loadPartialConfig({
+-        filename,
+-        cwd: projectRoot,
+-        sourceFileName: filename,
+-    });
+-    return `${cacheKey}${JSON.stringify(partial.options)}`;
++function generateCacheIdentifier(projectRoot, version = "1") {
++  const filename = path_1.default.join(projectRoot, "foobar.js");
++  const cacheKey = `babel-cache-${version}-`;
++  const partial = core_1.loadPartialConfig({
++    filename,
++    cwd: projectRoot,
++    sourceFileName: filename,
++  });
++  return `${cacheKey}${JSON.stringify(partial.options)}`;
+ }
+ /**
+  * Creates a Rule for loading Application code and packages from the Expo ecosystem.
+@@ -82,21 +86,27 @@ function generateCacheIdentifier(projectRoot, version = '1') {
+  * @internal
+  */
+ function createBabelLoaderFromEnvironment(env) {
+-    var _a;
+-    const mode = env_1.getMode(env);
+-    const locations = env.locations || env_1.getPaths(env.projectRoot, env);
+-    const appConfig = env.config || env_1.getConfig(env);
+-    const { build = {} } = appConfig.web;
+-    const { babel = {} } = build;
+-    return createBabelLoader({
+-        projectRoot: locations.root,
+-        mode,
+-        platform: env.platform,
+-        babelProjectRoot: babel.root || locations.root,
+-        verbose: babel.verbose,
+-        include: [...(babel.include || []), ...(((_a = env.babel) === null || _a === void 0 ? void 0 : _a.dangerouslyAddModulePathsToTranspile) || [])],
+-        use: babel.use,
+-    });
++  var _a;
++  const mode = env_1.getMode(env);
++  const locations = env.locations || env_1.getPaths(env.projectRoot, env);
++  const appConfig = env.config || env_1.getConfig(env);
++  const { build = {} } = appConfig.web;
++  const { babel = {} } = build;
++
++  return createBabelLoader({
++    projectRoot: locations.root,
++    mode,
++    platform: env.platform,
++    babelProjectRoot: babel.root || locations.root,
++    verbose: babel.verbose,
++    include: [
++      ...(babel.include || []),
++      ...(((_a = env.babel) === null || _a === void 0
++        ? void 0
++        : _a.dangerouslyAddModulePathsToTranspile) || []),
++    ],
++    use: babel.use,
++  });
+ }
+ exports.createBabelLoaderFromEnvironment = createBabelLoaderFromEnvironment;
+ /**
+@@ -105,104 +115,136 @@ exports.createBabelLoaderFromEnvironment = createBabelLoaderFromEnvironment;
+  * @category loaders
+  */
+ function createBabelLoader({
+-/**
+- * The webpack mode: `"production" | "development"`
+- */
+-mode, projectRoot: inputProjectRoot, babelProjectRoot, include = [], verbose, platform = 'web', useCustom, ...options } = {}) {
+-    const ensuredProjectRoot = ensureRoot(babelProjectRoot);
+-    const modules = [...includeModulesThatContainPaths, ...include];
+-    const customUse = options.use || {};
+-    const customUseOptions = customUse.options || {};
+-    const isProduction = mode === 'production';
+-    const projectRoot = inputProjectRoot || paths_1.getPossibleProjectRoot();
+-    let presetOptions = {
+-        // Explicitly use babel.config.js instead of .babelrc
++  /**
++   * The webpack mode: `"production" | "development"`
++   */
++  mode,
++  projectRoot: inputProjectRoot,
++  babelProjectRoot,
++  include = [],
++  verbose,
++  platform = "web",
++  useCustom,
++  ...options
++} = {}) {
++  const ensuredProjectRoot = ensureRoot(babelProjectRoot);
++  const modules = [...includeModulesThatContainPaths, ...include];
++  const customUse = options.use || {};
++  const customUseOptions = customUse.options || {};
++  const isProduction = mode === "production";
++  const projectRoot = inputProjectRoot || paths_1.getPossibleProjectRoot();
++  let presetOptions = {
++    // Explicitly use babel.config.js instead of .babelrc
++    babelrc: false,
++    // Attempt to use local babel.config.js file for compiling project.
++    configFile: true,
++  };
++  if (
++    !fs_extra_1.default.existsSync(
++      path_1.default.join(projectRoot, "babel.config.js")
++    ) &&
++    !fs_extra_1.default.existsSync(path_1.default.join(projectRoot, ".babelrc"))
++  ) {
++    // If no babel config exists then fallback on the default `babel-preset-expo`
++    // which is installed with `expo`.
++    const modulePath = resolve_from_1.default.silent(
++      projectRoot,
++      "babel-preset-expo"
++    );
++    if (modulePath) {
++      presetOptions = {
+         babelrc: false,
+-        // Attempt to use local babel.config.js file for compiling project.
+-        configFile: true,
+-    };
+-    if (!fs_extra_1.default.existsSync(path_1.default.join(projectRoot, 'babel.config.js')) &&
+-        !fs_extra_1.default.existsSync(path_1.default.join(projectRoot, '.babelrc'))) {
+-        // If no babel config exists then fallback on the default `babel-preset-expo`
+-        // which is installed with `expo`.
+-        const modulePath = resolve_from_1.default.silent(projectRoot, 'babel-preset-expo');
+-        if (modulePath) {
+-            presetOptions = {
+-                babelrc: false,
+-                configFile: false,
+-                presets: [modulePath],
+-            };
+-        }
+-        else {
+-            console.log(chalk_1.default.yellow('\u203A Webpack failed to locate a valid Babel config'));
+-        }
++        configFile: false,
++        presets: [modulePath],
++      };
++    } else {
++      console.log(
++        chalk_1.default.yellow(
++          "\u203A Webpack failed to locate a valid Babel config"
++        )
++      );
+     }
+-    presetOptions = {
+-        ...presetOptions,
+-        ...(customUseOptions || {}),
+-        sourceType: 'unambiguous',
+-        root: ensuredProjectRoot,
+-        compact: isProduction,
+-        // Babel sourcemaps are needed for debugging into node_modules
+-        // code.  Without the options below, debuggers like VSCode
+-        // show incorrect code and set breakpoints on the wrong lines.
+-        sourceMaps: shouldUseSourceMap,
+-        inputSourceMap: shouldUseSourceMap,
+-    };
+-    let cacheIdentifier = customUseOptions.cacheIdentifier;
+-    if (!cacheIdentifier) {
+-        try {
+-            cacheIdentifier = generateCacheIdentifier(ensuredProjectRoot);
+-        }
+-        catch (error) {
+-            console.log(chalk_1.default.black.bgRed(`The project's Babel config is invalid: ${error.message}`));
+-            throw error;
+-        }
++  }
++  presetOptions = {
++    ...presetOptions,
++    ...(customUseOptions || {}),
++    sourceType: "unambiguous",
++    root: ensuredProjectRoot,
++    compact: isProduction,
++    // Babel sourcemaps are needed for debugging into node_modules
++    // code.  Without the options below, debuggers like VSCode
++    // show incorrect code and set breakpoints on the wrong lines.
++    sourceMaps: shouldUseSourceMap,
++    inputSourceMap: shouldUseSourceMap,
++  };
++  let cacheIdentifier = customUseOptions.cacheIdentifier;
++  if (!cacheIdentifier) {
++    try {
++      cacheIdentifier = generateCacheIdentifier(ensuredProjectRoot);
++    } catch (error) {
++      console.log(
++        chalk_1.default.black.bgRed(
++          `The project's Babel config is invalid: ${error.message}`
++        )
++      );
++      throw error;
+     }
+-    presetOptions.cacheIdentifier = cacheIdentifier;
+-    presetOptions.cacheCompression = false;
+-    presetOptions.cacheDirectory =
+-        customUseOptions.cacheDirectory ||
+-            path_1.default.join(ensuredProjectRoot, '.expo', platform, 'cache', mode || 'development', 'babel-loader');
+-    presetOptions.caller = {
+-        __dangerous_rule_id: 'expo-babel-loader',
+-        bundler: 'webpack',
+-        platform,
+-        mode,
+-    };
+-    return {
+-        test: /\.(mjs|[jt]sx?)$/,
+-        // Can only clobber test
+-        // Prevent clobbering the `include` and `use` values.
+-        ...options,
+-        include(inputPath) {
+-            for (const possibleModule of modules) {
+-                if (inputPath.includes(path_1.default.normalize(possibleModule))) {
+-                    if (verbose) {
+-                        const packageName = packageNameFromPath(inputPath);
+-                        if (packageName)
+-                            logPackage(packageName);
+-                    }
+-                    return true;
+-                }
+-            }
+-            // Is inside the project and is not one of designated modules
+-            if (inputPath.includes(ensuredProjectRoot)) {
+-                for (const excluded of excludedRootPaths) {
+-                    if (inputPath.includes(path_1.default.normalize(excluded))) {
+-                        return false;
+-                    }
+-                }
+-                return true;
+-            }
+-            return false;
+-        },
+-        use: {
+-            ...customUse,
+-            loader: require.resolve('babel-loader'),
+-            options: presetOptions,
+-        },
+-    };
++  }
++  presetOptions.cacheIdentifier = cacheIdentifier;
++  presetOptions.cacheCompression = false;
++  presetOptions.cacheDirectory =
++    customUseOptions.cacheDirectory ||
++    path_1.default.join(
++      ensuredProjectRoot,
++      ".expo",
++      platform,
++      "cache",
++      mode || "development",
++      "babel-loader"
++    );
++  presetOptions.caller = {
++    __dangerous_rule_id: "expo-babel-loader",
++    bundler: "webpack",
++    platform,
++    mode,
++  };
++  return {
++    test: /\.(mjs|[jt]sx?)$/,
++    // Can only clobber test
++    // Prevent clobbering the `include` and `use` values.
++    ...options,
++    include(inputPath) {
++      return inputPath.endsWith(".css");
++      // for (const possibleModule of modules) {
++      //   if (inputPath.includes(path_1.default.normalize(possibleModule))) {
++      //     if (verbose) {
++      //       const packageName = packageNameFromPath(inputPath);
++      //       if (packageName) logPackage(packageName);
++      //     }
++
++      //       console.log(true, inputPath);
++      //     return true;
++      //   }
++      // }
++      // // Is inside the project and is not one of designated modules
++      // if (inputPath.includes(ensuredProjectRoot)) {
++      //   for (const excluded of excludedRootPaths) {
++      //     if (inputPath.includes(path_1.default.normalize(excluded))) {
++      //       console.log(false, inputPath);
++      //       return false;
++      //     }
++      //   }
++      //   return true;
++      // }
++      // return false;
++    },
++    use: {
++      ...customUse,
++      loader: require.resolve("babel-loader"),
++      options: presetOptions,
++    },
++  };
+ }
+ exports.default = createBabelLoader;
+ //# sourceMappingURL=createBabelLoader.js.map
++

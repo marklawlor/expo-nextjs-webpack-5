@@ -1,0 +1,61 @@
+diff --git a/node_modules/@expo/next-adapter/package.json b/node_modules/@expo/next-adapter/package.json
+index 230f5e0..7d3f4cb 100644
+--- a/node_modules/@expo/next-adapter/package.json
++++ b/node_modules/@expo/next-adapter/package.json
+@@ -1,27 +1,34 @@
+ {
+-  "_from": "https://registry.npmjs.org/@expo/next-adapter/-/next-adapter-3.0.1.tgz",
++  "_from": "@expo/next-adapter@3.0.1",
+   "_id": "@expo/next-adapter@3.0.1",
+   "_inBundle": false,
+   "_integrity": "sha512-eJcuId8ea+RGoppcsYRQd6LmriniMjbU80gAkPGIWTvQtvx7Sd5Mduzm5x/wN1Clt5vU3CUaWmSh1wZ5k7oCLg==",
+   "_location": "/@expo/next-adapter",
+-  "_phantomChildren": {},
++  "_phantomChildren": {
++    "@babel/plugin-proposal-decorators": "7.14.5",
++    "@babel/preset-env": "7.12.17",
++    "babel-plugin-module-resolver": "3.2.0",
++    "babel-plugin-react-native-web": "0.13.18",
++    "metro-react-native-babel-preset": "0.59.0"
++  },
+   "_requested": {
+-    "type": "remote",
+-    "raw": "@expo/next-adapter@https://registry.npmjs.org/@expo/next-adapter/-/next-adapter-3.0.1.tgz",
++    "type": "version",
++    "registry": true,
++    "raw": "@expo/next-adapter@3.0.1",
+     "name": "@expo/next-adapter",
+     "escapedName": "@expo%2fnext-adapter",
+     "scope": "@expo",
+-    "rawSpec": "https://registry.npmjs.org/@expo/next-adapter/-/next-adapter-3.0.1.tgz",
+-    "saveSpec": "https://registry.npmjs.org/@expo/next-adapter/-/next-adapter-3.0.1.tgz",
+-    "fetchSpec": "https://registry.npmjs.org/@expo/next-adapter/-/next-adapter-3.0.1.tgz"
++    "rawSpec": "3.0.1",
++    "saveSpec": null,
++    "fetchSpec": "3.0.1"
+   },
+   "_requiredBy": [
+     "/"
+   ],
+   "_resolved": "https://registry.npmjs.org/@expo/next-adapter/-/next-adapter-3.0.1.tgz",
+   "_shasum": "a8e5f6329e45417a6a3edc5d2529684988270c72",
+-  "_spec": "@expo/next-adapter@https://registry.npmjs.org/@expo/next-adapter/-/next-adapter-3.0.1.tgz",
+-  "_where": "/tmp/tmp-2926498pzXOlw8wDx0X",
++  "_spec": "@expo/next-adapter@3.0.1",
++  "_where": "/home/mark/Test/expo-nextjs-webpack-15",
+   "bin": {
+     "next-expo": "build/cli/index.js"
+   },
+@@ -71,6 +78,12 @@
+   ],
+   "license": "MIT",
+   "main": "build/index.js",
++  "exports": {
++    ".": "./build/index.js",
++    "./document": "./document.js",
++    "./babel": "./babel/index.js"
++
++  },
+   "name": "@expo/next-adapter",
+   "peerDependencies": {
+     "next": "^11",
